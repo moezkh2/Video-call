@@ -1,0 +1,24 @@
+{
+  "name": "video-call",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "backend": "nodemon server.js",
+    "frontend": "cd client && npm start",
+    "dev": "concurrently \" npm run backend\" \"npm run frontend\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^6.4.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "socket.io": "^4.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
