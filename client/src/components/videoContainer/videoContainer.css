@@ -1,0 +1,14 @@
+#video-container {
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  background-color: rgb(21, 21, 27);
+
+  left: 0px;
+  bottom: 0px;
+  top: 0px;
+  right: 0px;
+}
