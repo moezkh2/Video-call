@@ -4,6 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "heroku-prebuild": "npm i -f",
+    "heroku-postbuild": "npm run install-client && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "backend": "nodemon server.js",
     "frontend": "cd client && npm start",
@@ -15,6 +19,7 @@
   "dependencies": {
     "concurrently": "^6.4.0",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "socket.io": "^4.4.0"
   },
