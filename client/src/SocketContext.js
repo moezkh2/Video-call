@@ -4,7 +4,7 @@ import Peer from 'simple-peer';
 
 const SocketContext = createContext();
 
-const socket = io('/');
+const socket = io('https://call--me.herokuapp.com/');
 
 const ContextProvider = ({ children }) => {
     const [callAccepted, setCallAccepted] = useState(false);
@@ -84,7 +84,6 @@ const ContextProvider = ({ children }) => {
     };
 
     const callUser = (id) => {
-        console.log("calluser", id)
         const peer = new Peer({ initiator: true, trickle: false, stream });
 
         peer.on('signal', (data) => {

@@ -1,15 +1,13 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import './buttonBarr.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCopy, faMicrophoneAlt, faMicrophoneSlash, faPhoneAlt, faPhoneSlash, faVideo, faVideoSlash } from '@fortawesome/free-solid-svg-icons'
+import { faCopy, faMicrophoneAlt, faMicrophoneSlash, faPhoneAlt, faPhoneSlash, faUser, faVideo, faVideoSlash } from '@fortawesome/free-solid-svg-icons'
 import { SocketContext } from '../../SocketContext';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import SwalIdToCall from 'sweetalert2'
-import SwalCopy from 'sweetalert2'
-const ButtonBarr = () => {
-    const { me, callAccepted, name, callEnded, leaveCall, callUser, camState, micState, stopVideo, mutMic } = useContext(SocketContext)
-    const [idToCall, setIdToCall] = useState()
-    console.log(me)
+import SwalIdToCall from 'sweetalert2/src/sweetalert2.js'
+import SwalCopy from 'sweetalert2/src/sweetalert2.js'
+const ButtonBarr = ({ namePomp }) => {
+    const { me, callAccepted, callEnded, leaveCall, callUser, camState, micState, stopVideo, mutMic } = useContext(SocketContext)
     const idToCallPomp = async () => {
         const { value: IdToCall } = await SwalIdToCall.fire({
             title: 'Enter the id of the person to call',
@@ -28,12 +26,10 @@ const ButtonBarr = () => {
         })
 
         if (IdToCall) {
-            /* setIdToCall(IdToCall) */
             callUser(IdToCall)
         }
 
     }
-
 
     return (
         <div id='button-Barr'>
@@ -43,12 +39,14 @@ const ButtonBarr = () => {
                 onClick={stopVideo}>
                 <FontAwesomeIcon icon={camState ? faVideo : faVideoSlash} />
             </button>
+
             <button
                 id='mic'
                 className={micState ? 'success' : 'danger'}
                 onClick={mutMic}>
                 <FontAwesomeIcon icon={micState ? faMicrophoneAlt : faMicrophoneSlash} />
             </button>
+
             {callAccepted && !callEnded ?
 
                 (<button
@@ -78,6 +76,9 @@ const ButtonBarr = () => {
                 </button>
             </CopyToClipboard>
 
+            <button className='normal' onClick={namePomp} >
+                <FontAwesomeIcon icon={faUser} />
+            </button>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import './video.css'
 const Video = ({ dimention, Video, muted }) => {
 
