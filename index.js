@@ -12,7 +12,7 @@ const io = require("socket.io")(server, {
 
 app.use(cors());
 
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
 
 /* app.get('/', (req, res) => {
     res.send('Running');
@@ -34,11 +34,31 @@ io.on("connection", (socket) => {
     });
 });
 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static('./client/build'))
-    app.get('/*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client/build/index.html'));
-    })
-}
+// if (process.env.NODE_ENV === "production") {
+//     app.use(express.static('./client/build'))
+//     app.get('/*', (req, res) => {
+//         res.sendFile(path.resolve(__dirname, 'client/build/index.html'));
+//     })
+// }
 
-server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+// server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+app.use(express.static(path.join(__dirname, "./client/build")));
+
+app.get("*", function (_, res) {
+  res.sendFile(
+    path.join(__dirname, "./client/build/index.html"),
+    function (err) {
+      if (err) {
+        res.status(500).send(err);
+      }
+    }
+  );
+});
+app.listen(process.env.PORT, (err) => {
+    if (err) {
+        console.log(err)
+    } else {
+        console.log("server is running on http://localhost:5000")
+    }
+});
+module.exports = app;
