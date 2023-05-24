@@ -17,7 +17,6 @@ const ContextProvider = ({ children }) => {
     const [micState, setMicState] = useState(true)
 
 
-
     const myVideo = useRef(null);
     const userVideo = useRef();
     const connectionRef = useRef();
