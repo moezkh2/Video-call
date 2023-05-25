@@ -1,6 +1,7 @@
 const express = require('express')
 const app = require("express")();
 const server = require("http").createServer(app);
+const path = require("path");
 const cors = require("cors");
 require('dotenv').config()
 const io = require("socket.io")(server, {
@@ -12,7 +13,7 @@ const io = require("socket.io")(server, {
 
 app.use(cors());
 
-// const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 /* app.get('/', (req, res) => {
     res.send('Running');
@@ -20,16 +21,19 @@ app.use(cors());
 
 io.on("connection", (socket) => {
     socket.emit("me", socket.id);
+    console.log("connection")
 
     socket.on("disconnect", () => {
         socket.broadcast.emit("callEnded")
     });
 
     socket.on("callUser", ({ userToCall, signalData, from, name }) => {
+        console.log("callUser")
         io.to(userToCall).emit("callUser", { signal: signalData, from, name });
     });
 
     socket.on("answerCall", (data) => {
+        console.log("answerCall")
         io.to(data.to).emit("callAccepted", data.signal)
     });
 });
@@ -54,7 +58,7 @@ app.get("*", function (_, res) {
     }
   );
 });
-app.listen(process.env.PORT, (err) => {
+app.listen(PORT, (err) => {
     if (err) {
         console.log(err)
     } else {
