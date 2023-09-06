@@ -75,6 +75,7 @@ const ContextProvider = ({ children }) => {
 
         peer.on('stream', (currentStream) => {
             userVideo.current.srcObject = currentStream;
+            console.log(userVideo.current.srcObject,currentStream);
         });
 
         peer.signal(call.signal);
@@ -91,6 +92,7 @@ const ContextProvider = ({ children }) => {
 
         peer.on('stream', (currentStream) => {
             userVideo.current.srcObject = currentStream;
+            // console.log(userVideo.current.srcObject)
         });
 
         socket.on('callAccepted', (signal) => {
@@ -107,7 +109,7 @@ const ContextProvider = ({ children }) => {
 
         connectionRef.current.destroy();
 
-        window.location.reload()
+        // window.location.reload()
     };
 
     return (

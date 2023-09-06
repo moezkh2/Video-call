@@ -1,23 +1,14 @@
-const express = require('express')
-const app = require("express")();
-const server = require("http").createServer(app);
+const express = require('express');
 const path = require("path");
-const cors = require("cors");
-require('dotenv').config()
-const io = require("socket.io")(server, {
-    cors: {
-        origin: "*",
-        methods: ["GET", "POST"]
-    }
-});
-
-app.use(cors());
-
+const app = express();
+const http = require('http');
+const server = http.createServer(app);
+require('dotenv').config();
 const PORT = process.env.PORT || 5000;
+var cors = require('cors');
+app.use(cors());
+const io = require("socket.io")(server, { cors: { origin: "*" } });
 
-/* app.get('/', (req, res) => {
-    res.send('Running');
-}); */
 
 io.on("connection", (socket) => {
     socket.emit("me", socket.id);
@@ -38,31 +29,9 @@ io.on("connection", (socket) => {
     });
 });
 
-// if (process.env.NODE_ENV === "production") {
-//     app.use(express.static('./client/build'))
-//     app.get('/*', (req, res) => {
-//         res.sendFile(path.resolve(__dirname, 'client/build/index.html'));
-//     })
-// }
 
-// server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 app.use(express.static(path.join(__dirname, "./client/build")));
 
-app.get("*", function (_, res) {
-  res.sendFile(
-    path.join(__dirname, "./client/build/index.html"),
-    function (err) {
-      if (err) {
-        res.status(500).send(err);
-      }
-    }
-  );
+server.listen(PORT, () => {
+  console.log('listening on *:5000');
 });
-app.listen(PORT, (err) => {
-    if (err) {
-        console.log(err)
-    } else {
-        console.log("server is running on http://localhost:5000")
-    }
-});
-module.exports = app;

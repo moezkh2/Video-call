@@ -52,6 +52,7 @@ const Room = () => {
                 <VideoContainer >
                     {stream && (<Video muted={true} Video={myVideo}></Video>)}
                     {callAccepted && !callEnded && (<Video muted={false} Video={userVideo}></Video>)}
+                    
                 </VideoContainer>
 
                 <ButtonBarr namePomp={namePomp}  ></ButtonBarr>

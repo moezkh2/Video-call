@@ -3,7 +3,6 @@ import './video.css'
 const Video = ({ dimention, Video, muted }) => {
 
 
-
     return (
         <>
             <video
